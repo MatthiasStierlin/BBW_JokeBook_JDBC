@@ -20,4 +20,6 @@ public interface JokeService {
     public void updateAccessJoke(int jokeId, JokeBO jokeBO);
 
     public JokeBO getSpecificJoke(int jokeId);
+
+    public void deleteAccessJoke(int jokeId);
 }

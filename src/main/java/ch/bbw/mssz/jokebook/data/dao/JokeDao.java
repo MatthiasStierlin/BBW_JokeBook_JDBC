@@ -19,4 +19,6 @@ public interface JokeDao {
     public void updateAccessJoke(int jokeId,Joke joke);
 
     public Joke getSpecificJoke(int jokeId);
+
+    public void deleteAccessJoke(int jokeId);
 }

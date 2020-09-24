@@ -23,6 +23,7 @@
                         <th>Rating</th>
                         <th>Date</th>
                         <th>Update</th>
+                        <th>Delete</th>
                     </tr> </thead>
                     <thead> <tr th:each="JokeBO : ${accessJokes}">
                         <td th:text="${JokeBO.jokeId}"></td>
@@ -30,6 +31,7 @@
                         <td th:text="${JokeBO.rating}"></td>
                         <td th:text="${JokeBO.date}"></td>
                         <td><a class="btn btn-info" th:href="@{/updateAccessDBJoke/{id}(id=${JokeBO.jokeId})}">Update</a></td>
+                        <td><a class="btn btn-warning" th:href="@{/deleteAccessDBJoke?id={id}(id=${JokeBO.jokeId})}">Delete</a></td>
                     </tr> </thead>
                 </table>
 

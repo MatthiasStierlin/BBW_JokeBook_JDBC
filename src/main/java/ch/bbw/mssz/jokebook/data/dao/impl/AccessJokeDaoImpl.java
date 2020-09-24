@@ -93,6 +93,20 @@ public class AccessJokeDaoImpl implements JokeDao {
         }
     }
 
+    @Override
+    public void deleteAccessJoke(int jokeId) {
+        try {
+            Class.forName(DBDRIVER);
+            Connection connection = DriverManager.getConnection(DATABASEURL);
+            String sql = "DELETE FROM joke WHERE jokeid=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, jokeId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private Joke createJokeObjectForList(ResultSet resultSet) throws SQLException {
         Joke joke = new Joke();

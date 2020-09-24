@@ -51,4 +51,10 @@ public class AccessJokeBookController {
         jokeService.updateAccessJoke(jokeBO.getJokeId(),jokeBO);
         return "redirect:/accessDB";
     }
+
+    @GetMapping("/deleteAccessDBJoke")
+    public String deleteAccessDBJoke(@RequestParam(name="id", required = true) int jokeId, Model model) {
+        jokeService.deleteAccessJoke(jokeId);
+        return "redirect:/accessDB";
+    }
 }

@@ -49,4 +49,9 @@ public class JokeServiceImpl implements JokeService {
         Joke joke = this.jokeBOMapper.mapToJoke(jokeBO);
         jokeDao.updateAccessJoke(jokeId,joke);
     }
+
+    @Override
+    public void deleteAccessJoke(int jokeId) {
+        jokeDao.deleteAccessJoke(jokeId);
+    }
 }
