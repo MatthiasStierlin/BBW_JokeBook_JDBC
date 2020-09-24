@@ -31,4 +31,22 @@ public class JokeServiceImpl implements JokeService {
         Collection<Joke> jokes = jokeDao.getAllJokes();
         return this.jokeBOMapper.mapJokes(jokes);
     }
+
+    @Override
+    public JokeBO getSpecificJoke(int jokeId) {
+        Joke joke = jokeDao.getSpecificJoke(jokeId);
+        return this.jokeBOMapper.mapToJokeBO(joke);
+    }
+
+    @Override
+    public void addAccessJoke(JokeBO jokeBO) {
+        Joke joke = this.jokeBOMapper.mapToJoke(jokeBO);
+        jokeDao.addAccessJoke(joke);
+    }
+
+    @Override
+    public void updateAccessJoke(int jokeId,JokeBO jokeBO) {
+        Joke joke = this.jokeBOMapper.mapToJoke(jokeBO);
+        jokeDao.updateAccessJoke(jokeId,joke);
+    }
 }

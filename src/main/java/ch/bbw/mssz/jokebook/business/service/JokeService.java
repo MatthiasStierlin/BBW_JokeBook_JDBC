@@ -1,6 +1,7 @@
 package ch.bbw.mssz.jokebook.business.service;
 
 import ch.bbw.mssz.jokebook.business.bo.JokeBO;
+import ch.bbw.mssz.jokebook.data.entity.Joke;
 
 import java.util.Collection;
 
@@ -13,4 +14,10 @@ import java.util.Collection;
 public interface JokeService {
 
     public Collection<JokeBO> getAllJokes();
+
+    public void addAccessJoke(JokeBO jokeBO);
+
+    public void updateAccessJoke(int jokeId, JokeBO jokeBO);
+
+    public JokeBO getSpecificJoke(int jokeId);
 }

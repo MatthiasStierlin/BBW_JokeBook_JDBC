@@ -13,4 +13,10 @@ import java.util.Collection;
 public interface JokeDao {
 
     public Collection<Joke> getAllJokes();
+
+    public void addAccessJoke(Joke joke);
+
+    public void updateAccessJoke(int jokeId,Joke joke);
+
+    public Joke getSpecificJoke(int jokeId);
 }

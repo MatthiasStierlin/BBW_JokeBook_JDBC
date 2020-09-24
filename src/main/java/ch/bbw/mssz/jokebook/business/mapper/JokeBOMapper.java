@@ -16,4 +16,8 @@ import java.util.Collection;
 public interface JokeBOMapper {
 
     public Collection<JokeBO> mapJokes(Collection<Joke> jokes);
+
+    public JokeBO mapToJokeBO(Joke joke);
+
+    public Joke mapToJoke (JokeBO jokeBO);
 }
