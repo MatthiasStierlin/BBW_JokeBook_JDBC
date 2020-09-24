@@ -28,6 +28,9 @@ public class PostgreSqlJokeDaoImpl implements JokeDao{
             while (resultSet.next()) {
                 jokes.add(createJokeObjectForList(resultSet));
             }
+
+            resultSet.close();
+            statement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,6 +50,8 @@ public class PostgreSqlJokeDaoImpl implements JokeDao{
             while (resultSet.next()) {
                 joke = createJokeObjectForList(resultSet);
             }
+
+            preparedStatement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,8 +69,9 @@ public class PostgreSqlJokeDaoImpl implements JokeDao{
             preparedStatement.setInt(2, joke.getRating());
             preparedStatement.setDate(3, joke.getDate());
             preparedStatement.executeUpdate();
-            connection.close();
 
+            preparedStatement.close();
+            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,6 +88,8 @@ public class PostgreSqlJokeDaoImpl implements JokeDao{
             preparedStatement.setDate(3, joke.getDate());
             preparedStatement.setInt(4, jokeId);
             preparedStatement.executeUpdate();
+
+            preparedStatement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,6 +104,8 @@ public class PostgreSqlJokeDaoImpl implements JokeDao{
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, jokeId);
             preparedStatement.executeUpdate();
+
+            preparedStatement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
