@@ -1,12 +1,8 @@
 package ch.bbw.mssz.jokebook.rest.controller;
 
-import ch.bbw.mssz.jokebook.business.bo.JokeBO;
-import ch.bbw.mssz.jokebook.business.service.JokeService;
 import ch.bbw.mssz.jokebook.data.FactoryPattern;
 import ch.bbw.mssz.jokebook.data.dao.JokeDao;
 import ch.bbw.mssz.jokebook.data.entity.Joke;
-import ch.bbw.mssz.jokebook.rest.mapper.JokeMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 18.09.2020
  */
 @Controller
-public class AccessJokeBookController {
+public class JokeBookController {
 
     private FactoryPattern factoryPattern = new FactoryPattern();
 
@@ -31,7 +27,7 @@ public class AccessJokeBookController {
     @GetMapping("/accessDB")
     public String getAccessJokes(Model model) {
         model.addAttribute("accessJokes", Access.getAllJokes());
-        model.addAttribute("newAccessJoke", new JokeBO());
+        model.addAttribute("newAccessJoke", new Joke());
         return "accessJokeList";
     }
 
@@ -63,7 +59,7 @@ public class AccessJokeBookController {
     @GetMapping("/mysqlDB")
     public String getMysqlJokes(Model model) {
         model.addAttribute("mysqlJokes", MySql.getAllJokes());
-        model.addAttribute("newMysqlJoke", new JokeBO());
+        model.addAttribute("newMysqlJoke", new Joke());
         return "sqlJokeList";
     }
 
@@ -95,7 +91,7 @@ public class AccessJokeBookController {
     @GetMapping("/postgresDB")
     public String getPostgresJokes(Model model) {
         model.addAttribute("postgresJokes", Postgres.getAllJokes());
-        model.addAttribute("newPostgresJoke", new JokeBO());
+        model.addAttribute("newPostgresJoke", new Joke());
         return "postgresJokeList";
     }
 
