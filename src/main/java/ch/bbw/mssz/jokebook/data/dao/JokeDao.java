@@ -14,11 +14,11 @@ public interface JokeDao {
 
     public Collection<Joke> getAllJokes();
 
-    public void addAccessJoke(Joke joke);
+    public void addJoke(Joke joke);
 
-    public void updateAccessJoke(int jokeId,Joke joke);
+    public void updateJoke(int jokeId, Joke joke);
 
     public Joke getSpecificJoke(int jokeId);
 
-    public void deleteAccessJoke(int jokeId);
+    public void deleteJoke(int jokeId);
 }

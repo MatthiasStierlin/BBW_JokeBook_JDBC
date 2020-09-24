@@ -2,29 +2,26 @@ package ch.bbw.mssz.jokebook.data.dao.impl;
 
 import ch.bbw.mssz.jokebook.data.dao.JokeDao;
 import ch.bbw.mssz.jokebook.data.entity.Joke;
-import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * AccessJokeBook
+ * PostgreSqlJokeDaoImpl
  *
  * @author Matthias Stierlin
- * @version 11.09.2020
+ * @version 25.09.2020
  */
-@Repository
-public class AccessJokeDaoImpl implements JokeDao {
+public class PostgreSqlJokeDaoImpl implements JokeDao{
 
-    private static final String DATABASEURL = "jdbc:ucanaccess://C:/Developer/Data//BBW/M151//BBW_JokeBook_JDBC/SQL/JokeDB.mdb";
-    private static final String DBDRIVER = "net.ucanaccess.jdbc.UcanaccessDriver";
+    private static final String DATABASEURL = "jdbc:postgresql://localhost:5432/jokedb";
 
     @Override
     public Collection<Joke> getAllJokes() {
         Collection<Joke> jokes =new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"postgres", "1234");
             String sql = "SELECT * FROM  joke";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -35,14 +32,14 @@ public class AccessJokeDaoImpl implements JokeDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    return jokes;
+        return jokes;
     }
 
     @Override
     public Joke getSpecificJoke(int jokeId) {
         Joke joke = new Joke();
         try {
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"postgres", "1234");
             String sql = "SELECT * FROM  joke WHERE jokeid=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, jokeId);
@@ -60,8 +57,7 @@ public class AccessJokeDaoImpl implements JokeDao {
     @Override
     public void addJoke(Joke joke) {
         try {
-            Class.forName(DBDRIVER);
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"postgres", "1234");
             String sql = "INSERT INTO joke (content, rating, date) VALUES (?,?,?);";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, joke.getContent());
@@ -78,8 +74,7 @@ public class AccessJokeDaoImpl implements JokeDao {
     @Override
     public void updateJoke(int jokeId, Joke joke) {
         try {
-            Class.forName(DBDRIVER);
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"postgres", "1234");
             String sql = "UPDATE joke SET content=?, rating=?, date=? WHERE jokeid=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, joke.getContent());
@@ -96,8 +91,7 @@ public class AccessJokeDaoImpl implements JokeDao {
     @Override
     public void deleteJoke(int jokeId) {
         try {
-            Class.forName(DBDRIVER);
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"postgres", "1234");
             String sql = "DELETE FROM joke WHERE jokeid=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, jokeId);
@@ -118,3 +112,4 @@ public class AccessJokeDaoImpl implements JokeDao {
     }
 
 }
+

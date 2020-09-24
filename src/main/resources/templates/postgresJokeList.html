@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th=http://thymeleaf.org>
+<head>
+    <meta charset="UTF-8">
+    <title>Postgres Jokes</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="p-3">
+    <div class="col-sm-3">
+        <div th:switch="${postgresJokes}">
+            <div th:case="null">
+                <div class="alert alert-secondary" role="alert">
+                    <h4>Your don't have any jokes in the AccessDB right now.</h4>
+                    <p>Try adding some below 😉!</p>
+                </div>
+            </div>
+            <div th:case="*">
+                <table class="table table-striped">
+                    <thead> <tr>
+                        <th>JokeId</th>
+                        <th>Content</th>
+                        <th>Rating</th>
+                        <th>Date</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr> </thead>
+                    <thead> <tr th:each="JokeBO : ${postgresJokes}">
+                        <td th:text="${JokeBO.jokeId}"></td>
+                        <td th:text="${JokeBO.content}"></td>
+                        <td th:text="${JokeBO.rating}"></td>
+                        <td th:text="${JokeBO.date}"></td>
+                        <td><a class="btn btn-info" th:href="@{/updatePostgresDBJoke/{id}(id=${JokeBO.jokeId})}">Update</a></td>
+                        <td><a class="btn btn-warning" th:href="@{/deletePostgresDBJoke?id={id}(id=${JokeBO.jokeId})}">Delete</a></td>
+                    </tr> </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h5>Add Jokes to the list</h5>
+        <form action="#" th:action="@{/addPostgresDBJoke}" th:object="${newPostgresJoke}" method="post" class="col-sm-6">
+            <div class="form-group">
+                <label for="contentId">Content:</label>
+                <input type="text" class="form-control" id="contentId" th:field="*{content}"/>
+                <label for="ratingId">Rating:</label>
+                <input type="number" class="form-control" id="ratingId" th:field="*{rating}"/>
+                <label for="dateId">Date:</label>
+                <input type="date" class="form-control" id="dateId" th:field="*{date}"/>
+            </div>
+            <p>
+                <input type="submit" class="btn btn-success" value="Submit"/>
+            </p>
+        </form>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<footer class="page-footer font-small blue fixed-bottom">
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://ethz.ch/services/en/organisation/departments/it-services/people/person-detail.MjQ3NTEx.TGlzdC8yMTE0LC04NTM1NzczMTQ=.html">Matthias
+            Stierlin</a>
+    </div>
+</footer>
+
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

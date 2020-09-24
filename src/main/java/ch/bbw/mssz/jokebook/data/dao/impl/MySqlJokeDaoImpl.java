@@ -9,22 +9,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * AccessJokeBook
+ * MySqlJokeDaoImpl
  *
  * @author Matthias Stierlin
- * @version 11.09.2020
+ * @version 24.09.2020
  */
-@Repository
-public class AccessJokeDaoImpl implements JokeDao {
+public class MySqlJokeDaoImpl implements JokeDao{
 
-    private static final String DATABASEURL = "jdbc:ucanaccess://C:/Developer/Data//BBW/M151//BBW_JokeBook_JDBC/SQL/JokeDB.mdb";
-    private static final String DBDRIVER = "net.ucanaccess.jdbc.UcanaccessDriver";
+    private static final String DATABASEURL = "jdbc:mysql://localhost:3308/jokedb";
+    private static final String DBDRIVER = "com.mysql.jdbc.Driver";
+
 
     @Override
     public Collection<Joke> getAllJokes() {
         Collection<Joke> jokes =new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"bbw", "");
             String sql = "SELECT * FROM  joke";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -35,14 +35,14 @@ public class AccessJokeDaoImpl implements JokeDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    return jokes;
+        return jokes;
     }
 
     @Override
     public Joke getSpecificJoke(int jokeId) {
         Joke joke = new Joke();
         try {
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"bbw", "");
             String sql = "SELECT * FROM  joke WHERE jokeid=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, jokeId);
@@ -61,7 +61,7 @@ public class AccessJokeDaoImpl implements JokeDao {
     public void addJoke(Joke joke) {
         try {
             Class.forName(DBDRIVER);
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"bbw", "");
             String sql = "INSERT INTO joke (content, rating, date) VALUES (?,?,?);";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, joke.getContent());
@@ -79,7 +79,7 @@ public class AccessJokeDaoImpl implements JokeDao {
     public void updateJoke(int jokeId, Joke joke) {
         try {
             Class.forName(DBDRIVER);
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"bbw", "");
             String sql = "UPDATE joke SET content=?, rating=?, date=? WHERE jokeid=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, joke.getContent());
@@ -97,7 +97,7 @@ public class AccessJokeDaoImpl implements JokeDao {
     public void deleteJoke(int jokeId) {
         try {
             Class.forName(DBDRIVER);
-            Connection connection = DriverManager.getConnection(DATABASEURL);
+            Connection connection = DriverManager.getConnection(DATABASEURL,"bbw", "");
             String sql = "DELETE FROM joke WHERE jokeid=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, jokeId);
@@ -118,3 +118,5 @@ public class AccessJokeDaoImpl implements JokeDao {
     }
 
 }
+
+

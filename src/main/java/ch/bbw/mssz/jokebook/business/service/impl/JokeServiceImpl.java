@@ -8,7 +8,6 @@ import ch.bbw.mssz.jokebook.data.entity.Joke;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Access;
 import java.util.Collection;
 
 /**
@@ -27,7 +26,7 @@ public class JokeServiceImpl implements JokeService {
     private JokeBOMapper jokeBOMapper;
 
     @Override
-    public Collection<JokeBO> getAllJokes() {
+    public Collection<JokeBO> getAllAccessJokes() {
         Collection<Joke> jokes = jokeDao.getAllJokes();
         return this.jokeBOMapper.mapJokes(jokes);
     }
@@ -41,17 +40,17 @@ public class JokeServiceImpl implements JokeService {
     @Override
     public void addAccessJoke(JokeBO jokeBO) {
         Joke joke = this.jokeBOMapper.mapToJoke(jokeBO);
-        jokeDao.addAccessJoke(joke);
+        jokeDao.addJoke(joke);
     }
 
     @Override
     public void updateAccessJoke(int jokeId,JokeBO jokeBO) {
         Joke joke = this.jokeBOMapper.mapToJoke(jokeBO);
-        jokeDao.updateAccessJoke(jokeId,joke);
+        jokeDao.updateJoke(jokeId,joke);
     }
 
     @Override
     public void deleteAccessJoke(int jokeId) {
-        jokeDao.deleteAccessJoke(jokeId);
+        jokeDao.deleteJoke(jokeId);
     }
 }

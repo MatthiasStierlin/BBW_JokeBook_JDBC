@@ -13,7 +13,7 @@ import java.util.Collection;
  */
 public interface JokeService {
 
-    public Collection<JokeBO> getAllJokes();
+    public Collection<JokeBO> getAllAccessJokes();
 
     public void addAccessJoke(JokeBO jokeBO);
 
