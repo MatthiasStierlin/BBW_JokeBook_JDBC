@@ -7,6 +7,27 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <a class="navbar-brand" href="/">Stierlin Joke Database</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/accessDB">Access DB</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/postgresDB">PostgreSql DB</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/mysqlDB">Mysql DB</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <form action="#" th:action="@{/updateMysqlDBJoke}" th:object="${mysqlJoke}" method="post" class="col-sm-6">
     <div class="form-group">
         <label for="jokeId">JokeId</label>
